@@ -4,6 +4,46 @@ export const colocarBarcosUsuario = () => {
     let barcoArrastrado = "";
     let insertado = false;
     const celdas = document.querySelectorAll(".jugador .celda");
+    const endDragOrTouch=(event)=>{
+        event.preventDefault();
+        let arrayCeldas = Array.from(celdas);
+        let filasABorrar = arrayCeldas.filter((celdaConBarco) => {
+            return celdaConBarco.classList.contains("sinespacio");
+        });
+        filasABorrar.map((v) => {
+            v.classList.remove("sinespacio");
+        })
+        let barco = arrayCeldas.filter((celdaConBarco) => {
+            return celdaConBarco.classList.contains("viable");
+        });
+        let contador = 1;
+        barco.map((v, i, a) => {
+    
+            mostrarBarcoEnFondo(v, contador);
+
+            contador++;
+        }, false);
+        if (insertado) {
+           
+            barcoArrastrado.classList.add("hidden");
+            let barcosQueFaltan = document.getElementsByTagName("img");
+            barcosQueFaltan = Array.from(barcosQueFaltan);
+            barcosQueFaltan = barcosQueFaltan.filter((imagenes) => {
+                return imagenes.classList.contains("hidden");
+            });
+            var mensaje = document.getElementsByClassName("turno");
+            var resultado= document.getElementsByClassName("resultado")
+            let empezar = document.getElementsByTagName("button");
+            mensaje[0].innerHTML = `Te faltan por colocar ${4 - barcosQueFaltan.length} barcos`;
+            if (barcosQueFaltan.length === 4) {
+                mensaje[0].innerHTML = " Pulsa el botón EMPEZAR  o reinicia el juego con el botón arriba a la izquierda para reorganizar los barcos";
+                resultado[0].innerHTML = " Pulsa el botón EMPEZAR  o reinicia el juego con el botón arriba a la izquierda para reorganizar los barcos";
+                empezar[0].classList.remove("hidden");
+            }
+            barcoArrastrado = "";
+            insertado = false;
+        }
+    };
     const mostrarSombraBarco = (barco, posicion) => {
         let longitud = 2;
         let celdasOcupada = false;
@@ -11,6 +51,8 @@ export const colocarBarcosUsuario = () => {
         if (barco.classList.contains("lg-4")) longitud = 4;
         else if (barco.classList.contains("lg-3")) longitud = 3;
         else if (barco.classList.contains("lg-2")) longitud = 2;
+
+       
 
         if (axis === "x") {
 
@@ -92,49 +134,22 @@ export const colocarBarcosUsuario = () => {
         barcoArrastrado = (event.target);
 
     }, false);
+    document.addEventListener("touchstart", (event) => {
+        barcoArrastrado = (event.target);
+
+    }, false);
     document.addEventListener("dragover", (event) => {
         event.preventDefault();
     }, false);
-
-    document.addEventListener("drop", (event) => {
+    document.addEventListener("touchmove", (event) => {
         event.preventDefault();
-        let arrayCeldas = Array.from(celdas);
-        let filasABorrar = arrayCeldas.filter((celdaConBarco) => {
-            return celdaConBarco.classList.contains("sinespacio");
-        });
-        filasABorrar.map((v) => {
-            v.classList.remove("sinespacio");
-        })
-        let barco = arrayCeldas.filter((celdaConBarco) => {
-            return celdaConBarco.classList.contains("viable");
-        });
-        let contador = 1;
-        barco.map((v, i, a) => {
-    
-            mostrarBarcoEnFondo(v, contador);
-
-            contador++;
-        }, false);
-        if (insertado) {
-           
-            barcoArrastrado.classList.add("hidden");
-            let barcosQueFaltan = document.getElementsByTagName("img");
-            barcosQueFaltan = Array.from(barcosQueFaltan);
-            barcosQueFaltan = barcosQueFaltan.filter((imagenes) => {
-                return imagenes.classList.contains("hidden");
-            });
-            var mensaje = document.getElementsByClassName("turno");
-            var resultado= document.getElementsByClassName("resultado")
-            let empezar = document.getElementsByTagName("button");
-            mensaje[0].innerHTML = `Te faltan por colocar ${4 - barcosQueFaltan.length} barcos`;
-            if (barcosQueFaltan.length === 4) {
-                mensaje[0].innerHTML = " Pulsa el botón EMPEZAR  o reinicia el juego con el botón arriba a la izquierda para reorganizar los barcos";
-                resultado[0].innerHTML = " Pulsa el botón EMPEZAR  o reinicia el juego con el botón arriba a la izquierda para reorganizar los barcos";
-                empezar[0].classList.remove("hidden");
-            }
-            barcoArrastrado = "";
-            insertado = false;
-        }
-
     }, false);
+    
+    document.addEventListener("touchend", (event) => {
+        endDragOrTouch(event);
+    }, false);
+    document.addEventListener("drop", (event) => {
+     
+    endDragOrTouch(event);
+}, false);
 }
