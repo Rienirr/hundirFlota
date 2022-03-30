@@ -1,0 +1,256 @@
+body{
+  background-image: url("./fondo.jpg");
+  background-size: 1920px 1080px;
+  color:white;
+  --fondo: rgba(255, 255, 255, 0.6);
+}
+.resultado, .turno{
+  text-align: center;
+  color: black;
+  padding: 10px;
+  background-color: var(--fondo);
+  margin-left: 250px;
+  border-radius: 20px;
+  font-size: 18px;
+}
+.reload{
+ position: absolute;
+ background-color: rgba(0, 0, 255, 0.6);
+    color:white;
+    padding: 15px;
+    font-size: 1em;
+    border-radius: 15px;
+    transition: all 1s ease-in-out;
+    
+}
+.reload:hover{
+  cursor: pointer;
+  background-color: rgba(0, 0, 255, 0.6);
+  color:white;
+  text-shadow: 2px 2px 2px black;
+  font-size: 1.5em;
+  border: 5px solid whitesmoke;
+  transition: all 1s ease-in-out;
+}
+
+
+.hidden{
+    display: none;
+}
+.juegoAcabado, .turnoContrario{
+    pointer-events: none;
+}
+
+
+.cabecera{
+ 
+  padding: 20px;
+  border-bottom: 3px solid white;
+  border-radius: 50%;
+  transition: all 1s ease-in;
+}
+.cabecera:hover{
+  border: 3px solid white;
+ transition: all .5s ease-out;
+}
+.cabecera.ganador:hover{
+  border: 20px solid black;
+  text-decoration: underline;
+  border-radius: 50%;
+ transition: all .5s ease-out;
+}
+section{
+  display: inline-block;
+  background-color: var(--fondo);
+}
+.cabecera.ganador{
+  color:gold;
+}
+.ganador{
+border: 15px solid black;
+
+border-radius: 20px;
+font-size: 2em;
+font-style: italic;
+}
+.textoGanador{
+  max-width: 350px;
+  max-height: 500px;
+  font-size: 1.5em;
+  background-color: green;
+  
+  margin: 0px;
+}
+
+
+button{
+    background-color: blue;
+    color:white;
+    padding: 15px;
+    font-size: 80px;
+    border-radius: 15px;
+    margin-left: 40%;
+    transition: all 1s ease-in-out;
+}
+button:hover{
+  transition: all 1s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 0 8px 10px black;
+  text-shadow: 5px 5px 2px black;
+}
+.hundido{
+    background-color: gray;
+}
+.hundido,.golpeado, .fallado{
+    
+    cursor: not-allowed;
+}
+.viable {
+  background-color: green;
+}
+.sinespacio {
+   
+  background-color: red;
+}
+.turno{
+  max-height: 120px;
+  
+}
+p+p{
+  display: inline-block;
+  margin: 0px;
+}
+
+.tablero {
+  display: grid;
+  margin-top: 30px;
+  grid-template: 100px/1fr 0.6fr 1fr;
+  grid-auto-rows: 650px;
+  justify-items: center;
+  align-items: center;
+}
+.jugador,
+.ordenador {
+  background-image: url("./fondo.gif");
+  display: grid;
+  grid-template: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px /50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+  cursor: pointer;
+}
+.celda {
+  border: 1px solid;
+}
+
+div .acierto {
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  margin: 30%;
+  border-radius: 50%;
+}
+.fallo {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 8px;
+  height: 25px;
+  margin: 29% 45%;
+}
+.fallo::before {
+  position: absolute;
+  display: flex;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  width: 8px;
+  height: 25px;
+  content: "";
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.fallo::after {
+  position: absolute;
+  display: flex;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  width: 8px;
+  height: 25px;
+  content: "";
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.barco:first-of-type {
+  background-color: green;
+}
+div.buque1 {
+  background-image: url(./battleships.jpg);
+  background-size: 200px 50px;
+  background-position: 0% 0%;
+}
+div.buque2 {
+  background-image: url(./battleships.jpg);
+  background-size: 200px 50px;
+  background-position: 25% 0%;
+}
+div.buque3 {
+  background-image: url(./battleships.jpg);
+  background-size: 200px 50px;
+  background-position: 50% 0%;
+}
+div.buque4 {
+  background-image: url(./battleships.jpg);
+  background-size: 200px 50px;
+  background-position: 75% 0%;
+}
+div.submarine1 {
+  background-image: url(./submarine.png);
+  background-size: 140px 50px;
+  background-position: 0% 0%;
+}
+div.submarine2 {
+  background-image: url(./submarine.png);
+  background-size: 140px 50px;
+  background-position: 33% 0%;
+}
+div.submarine3 {
+  background-image: url(./submarine.png);
+  background-size: 140px 50px;
+  background-position: 66% 0%;
+}
+div.destructor1 {
+  background-image: url(./desctructor.png);
+  background-size: 100px 50px;
+  background-position: 0% 0%;
+}
+div.destructor2 {
+  background-image: url(./desctructor.png);
+  background-size: 100px 50px;
+  background-position: 50px 0%;
+}
+div.carrier1 {
+  background-image: url(./carrier.png);
+  background-size: 200px 50px;
+  background-position: 0% 0%;
+}
+div.carrier2 {
+  background-image: url(./carrier.png);
+  background-size: 200px 50px;
+  background-position: 25% 0%;
+}
+
+div.carrier3 {
+  background-image: url(./carrier.png);
+  background-size: 200px 50px;
+  background-position: 50% 0%;
+}
+
+div.carrier4 {
+  background-image: url(./carrier.png);
+  background-size: 200px 50px;
+  background-position: 75% 0%;
+}
+.y {
+  transform: rotate(90deg);
+}
